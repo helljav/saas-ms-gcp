@@ -1,0 +1,6 @@
+runtime: java1.8
+instance_class: F1
+
+env_variables:
+  JAVA_OPTS: -Djava.security.egd=file:/dev/./urandom
+  JAVA_TOOL_OPTIONS: "-XX:MaxRAM=256m -XX:ActiveProcessorCount=2 -Xmx32m" 

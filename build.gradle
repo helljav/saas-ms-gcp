@@ -1,0 +1,49 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.10'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+	id 'com.google.cloud.tools.appengine'
+}
+
+group = 'mx.com.asteci.gcp'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+} 
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudGcpVersion', "3.3.0")
+	set('springCloudVersion', "2021.0.3")
+}
+
+
+
+dependencies {
+	implementation group: 'com.google.cloud', name: 'spring-cloud-gcp-security-iap', version: '3.3.0'
+	providedCompile 'com.google.appengine:appengine:+'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'com.google.cloud:spring-cloud-gcp-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+ appengine {
+    deploy {   // deploy configuration
+      stopPreviousVersion = true  // default - stop the current version
+      promote = true              // default - & make this the current version
+    }
+  }
+
+dependencyManagement {
+	imports {
+		mavenBom "com.google.cloud:spring-cloud-gcp-dependencies:${springCloudGcpVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
