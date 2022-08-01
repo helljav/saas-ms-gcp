@@ -2,14 +2,12 @@ plugins {
 	id 'org.springframework.boot' version '2.6.10'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 	id 'java'
-	id 'com.google.cloud.tools.appengine'
 }
 
 group = 'mx.com.asteci.gcp'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
-
-} 
+ 
 repositories {
 	mavenCentral()
 }
@@ -23,19 +21,12 @@ ext {
 
 dependencies {
 	implementation group: 'com.google.cloud', name: 'spring-cloud-gcp-security-iap', version: '3.3.0'
-	providedCompile 'com.google.appengine:appengine:+'
+	implementation group: 'com.google.appengine', name: 'appengine-api-1.0-sdk', version: '2.0.5'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'com.google.cloud:spring-cloud-gcp-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
-
- appengine {
-    deploy {   // deploy configuration
-      stopPreviousVersion = true  // default - stop the current version
-      promote = true              // default - & make this the current version
-    }
-  }
 
 dependencyManagement {
 	imports {
